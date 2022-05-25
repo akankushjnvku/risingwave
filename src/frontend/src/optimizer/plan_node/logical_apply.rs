@@ -46,14 +46,14 @@ impl fmt::Display for LogicalApply {
 
 impl LogicalApply {
     pub(crate) fn new(left: PlanRef, right: PlanRef, join_type: JoinType) -> Self {
-        assert!(
-            matches!(
-                join_type,
-                JoinType::LeftOuter | JoinType::LeftSemi | JoinType::LeftAnti
-            ),
-            "Invalid join type {:?} for LogicalApply",
-            join_type
-        );
+        // assert!(
+        //     matches!(
+        //         join_type,
+        //         JoinType::LeftOuter | JoinType::LeftSemi | JoinType::LeftAnti
+        //     ),
+        //     "Invalid join type {:?} for LogicalApply",
+        //     join_type
+        // );
         let ctx = left.ctx();
         let schema = LogicalJoin::derive_schema(left.schema(), right.schema(), join_type);
         let pk_indices = LogicalJoin::derive_pk(
